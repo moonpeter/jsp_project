@@ -11,7 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-<p><%= session.getAttribute("id")%>님 로그인에 성공하셨습니다.</p>
-<a href="/ex_test/logout.jsp">로그아웃</a>
+<p><%= session.getAttribute("id")%>님 로그아웃 되셨습니다.</p>
+<%= session.removeAttribute("id")%>
+<a href="/ex_test/login/login.jsp">로그인</a>
 </body>
 </html>

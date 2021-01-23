@@ -1,4 +1,4 @@
-package ex_test;
+package ex_test.login;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
