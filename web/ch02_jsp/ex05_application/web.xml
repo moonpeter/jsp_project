@@ -18,14 +18,4 @@
         <param-name>color</param-name>
         <param-value>orange</param-value>
     </context-param>
-    <context-param>
-        <description>아이디</description>
-        <param-name>id</param-name>
-        <param-value>jsp</param-value>
-    </context-param>
-    <context-param>
-        <description>비밀번호</description>
-        <param-name>password</param-name>
-        <param-value>jsp</param-value>
-    </context-param>
 </web-app>
