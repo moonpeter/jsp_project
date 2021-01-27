@@ -14,6 +14,6 @@
 <%
     request.setAttribute("food", "과자");
 %>
-<jsp:forward page="forwardTest2.jsp"></jsp:forward>
+<jsp:forward page="forwardTest2.jsp" />
 </body>
 </html>

@@ -18,7 +18,7 @@ public class InputServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/ex_test/intro/Intro.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/ex_test/intro/Intro.jsp");
         dispatcher.forward(request, response);
     }
 }
