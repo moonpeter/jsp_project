@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="jsp_test">
+    <output-path>/usr/local/Cellar/tomcat/9.0.41/libexec/webapps</output-path>
+    <root id="archive" name="jsp_test.war">
+      <element id="artifact" artifact-name="untitled:war exploded" />
+    </root>
+  </artifact>
+</component>
