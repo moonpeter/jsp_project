@@ -1,6 +1,8 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="jdbc.ex01_arraylist.Dept" %><%--
+<%@ page import="jdbc.ex02_map.Dept" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Set" %><%--
   Created by IntelliJ IDEA.
   User: moonpeter
   Date: 2021/01/28
@@ -20,7 +22,7 @@
 <body>
 <div class="container">
 <%
-    ArrayList<Dept> list = (ArrayList<Dept>) request.getAttribute("list");
+    HashMap<Integer, Object> list = (HashMap<Integer, Object>) request.getAttribute("list");
     if(list != null) {
 %>
 <table class="table">
@@ -31,7 +33,9 @@
     </tr>
     <tbody>
     <%
-        for (Dept dept : list) {
+        Set<Integer> keys = list.keySet();
+        for (int key : keys) {
+            Dept dept = (Dept) list.get(key);
     %>
     <tr>
         <td><%=dept.getDeptno()%></td>

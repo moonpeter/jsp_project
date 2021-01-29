@@ -1,4 +1,4 @@
-package jdbc;
+package jdbc.ex02_map;
 
 public class Dept {
     private int deptno;

@@ -1,4 +1,4 @@
-package jdbc;
+package jdbc.ex02_map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -7,15 +7,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DAO {
 
-    public ArrayList<Dept> selectAll() {
+    public HashMap<Integer, Object> selectAll() {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        ArrayList<Dept> list = null;
+        HashMap<Integer, Object> list = null;
         try {
             Context init = new InitialContext();
             DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
@@ -36,9 +36,9 @@ public class DAO {
                 dept.setDname(dname);
                 dept.setLoc(loc);
                 if (i++ == 0) {
-                    list = new ArrayList<Dept>();
+                    list = new HashMap<Integer, Object>();
                 }
-                list.add(dept);
+                list.put(i, dept);
             }
 
         } catch (Exception e) {
