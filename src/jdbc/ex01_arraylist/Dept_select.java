@@ -17,7 +17,7 @@ public class Dept_select extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DAO dao = new DAO();
         ArrayList<Dept> list = dao.selectAll();
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ch03_jdbc/ex01/list_el.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ch03_jdbc/ex01/dept_search.jsp");
         request.setAttribute("list", list);
         dispatcher.forward(request, response);
     }

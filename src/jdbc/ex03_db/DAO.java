@@ -1,4 +1,4 @@
-package jdbc.ex01_arraylist;
+package jdbc.ex03_db;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -7,49 +7,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DAO {
-
-    public ArrayList<Dept> selectAll() {
+    public int insert(Template_join join) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        ArrayList<Dept> list = null;
+        int result = 0;
         try {
             Context init = new InitialContext();
             DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
             conn = ds.getConnection();
 
-            String select_sql = "select * from dept";
+            String sql = "insert into template_join\n" +
+                    "(id, password, jumin, email, gender, hobby, post, address, intro)\n" +
+                    "values(?,?,?,?,?,?,?,?,?)";
 
-            pstmt = conn.prepareStatement(select_sql.toString());
-            rs = pstmt.executeQuery();
-
-            int i = 0;
-            while (rs.next()) {
-                int deptno = rs.getInt("deptno");
-                String dname = rs.getString("dname");
-                String loc = rs.getString("loc");
-                Dept dept = new Dept();
-                dept.setDeptno(deptno);
-                dept.setDname(dname);
-                dept.setLoc(loc);
-                if (i++ == 0) {
-                    list = new ArrayList<Dept>();
-                }
-                list.add(dept);
-            }
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, join.getId());
+            pstmt.setString(2, join.getPassword());
+            pstmt.setString(3, join.getJumin());
+            pstmt.setString(4, join.getEmail());
+            pstmt.setString(5, join.getGender());
+            pstmt.setString(6, join.getHobby());
+            pstmt.setString(7, join.getPost());
+            pstmt.setString(8, join.getAddress());
+            pstmt.setString(9, join.getIntro());
+            result = pstmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (rs != null)
-                    rs.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
             try {
                 if (pstmt != null)
                     pstmt.close();
@@ -63,45 +50,38 @@ public class DAO {
                 System.out.println(e.getMessage());
             }
         }
-        return list;
+        return result;
     }
 
-    public ArrayList<Dept> select(int inputdeptno) {
+    public int isId(String id, String password) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        ArrayList<Dept> list = null;
+        int result = 0;
         try {
             Context init = new InitialContext();
             DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
             conn = ds.getConnection();
 
-            String select_sql = "select * from dept where deptno=?";
+            String sql = "select id, password from template_join where id=?";
 
-            pstmt = conn.prepareStatement(select_sql.toString());
-            pstmt.setInt(1, inputdeptno);
+            pstmt = conn.prepareStatement(sql.toString());
+            pstmt.setString(1, id);
             rs = pstmt.executeQuery();
 
-            int i = 0;
-            while (rs.next()) {
-                int deptno = rs.getInt("deptno");
-                String dname = rs.getString("dname");
-                String loc = rs.getString("loc");
-                Dept dept = new Dept();
-                dept.setDeptno(deptno);
-                dept.setDname(dname);
-                dept.setLoc(loc);
-                if (i++ == 0) {
-                    list = new ArrayList<Dept>();
+            if (rs.next()) {
+                if(rs.getString("password").equals(password)) {
+                    result =1;
+                } else {
+                    result=-1;
                 }
-                list.add(dept);
-            }
 
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null)
+                if(rs != null)
                     rs.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -119,6 +99,6 @@ public class DAO {
                 System.out.println(e.getMessage());
             }
         }
-        return list;
+        return result;
     }
 }
