@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DAO {
     public int insert(Template_join join) {
@@ -100,5 +101,117 @@ public class DAO {
             }
         }
         return result;
+    }
+
+    public ArrayList<Template_join> selectAll() {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<Template_join> list = null;
+        try {
+            Context init = new InitialContext();
+            DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
+            conn = ds.getConnection();
+
+            String sql = "select * from template_join";
+            pstmt = conn.prepareStatement(sql);
+
+            rs = pstmt.executeQuery();
+            int i =0;
+            while (rs.next()) {
+                if(i++==0) {
+                    list = new ArrayList<Template_join>();
+                }
+                Template_join temp = new Template_join();
+                temp.setId(rs.getString("id"));
+                temp.setPassword(rs.getString("password"));
+                temp.setJumin(rs.getString("jumin"));
+                temp.setEmail(rs.getString("email"));
+                temp.setGender(rs.getString("gender"));
+                temp.setHobby(rs.getString("hobby"));
+                temp.setPost(rs.getString("post"));
+                temp.setAddress(rs.getString("address"));
+                temp.setIntro(rs.getString("intro"));
+                temp.setRegister_date(rs.getString("register_date"));
+                list.add(temp);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return list;
+    }
+
+    public Template_join selectInfo(String id) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+
+            Context init = new InitialContext();
+            DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
+            conn = ds.getConnection();
+
+            String sql = "select * from template_join where id=?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Template_join temp = new Template_join();
+                temp.setId(rs.getString("id"));
+                temp.setPassword(rs.getString("password"));
+                temp.setJumin(rs.getString("jumin"));
+                temp.setEmail(rs.getString("email"));
+                temp.setGender(rs.getString("gender"));
+                temp.setHobby(rs.getString("hobby"));
+                temp.setPost(rs.getString("post"));
+                temp.setAddress(rs.getString("address"));
+                temp.setIntro(rs.getString("intro"));
+                return temp;
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return null;
     }
 }
