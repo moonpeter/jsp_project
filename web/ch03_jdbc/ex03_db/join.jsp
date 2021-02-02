@@ -8,7 +8,7 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/ch02_jsp/ex10_intro/intro.css" type="text/css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/ch02_jsp/ex10_intro/intro.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/ch03_jdbc/ex03_db/intro.js"></script>
 </head>
 <body>
 <form action="join_ok" method="post" name="myform" id="myform">
@@ -17,7 +17,7 @@
             <legend>유효성 검사</legend>
             <label>ID</label><br>
             <input type="text" size="10" name="id" id="id" placeholder="Enter Id">
-            <input type="button" value="ID중복검사" id="idcheck"><br>
+            <input type="button" value="ID중복검사" id="idcheck"><div id="result"></div><br>
 
             <label>비밀번호</label><br>
             <input type="password" name="pass" id="pass" placeholder="Enter Password"><br>

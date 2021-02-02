@@ -103,6 +103,10 @@ public class DAO {
         return result;
     }
 
+    public int isId(String id) {
+        return isId(id, null);
+    }
+
     public ArrayList<Template_join> selectAll() {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -214,4 +218,57 @@ public class DAO {
         }
         return null;
     }
+
+    public int update(Template_join join) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            Context init = new InitialContext();
+            DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
+            conn = ds.getConnection();
+
+            String sql = "update template_join "
+                    + " set password=?, jumin=?, email=?, gender=?, hobby=?, post=?, address=?, intro=? "
+                    + " where id = ?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, join.getPassword());
+            pstmt.setString(2, join.getJumin());
+            pstmt.setString(3, join.getEmail());
+            pstmt.setString(4, join.getGender());
+            pstmt.setString(5, join.getHobby());
+            pstmt.setString(6, join.getPost());
+            pstmt.setString(7, join.getAddress());
+            pstmt.setString(8, join.getIntro());
+            pstmt.setString(9, join.getId());
+            result = pstmt.executeUpdate();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+
 }

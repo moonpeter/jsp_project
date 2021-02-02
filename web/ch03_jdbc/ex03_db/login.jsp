@@ -115,6 +115,7 @@
     <div class="form-group">
         <label for="id">아이디:</label>
         <input type="text" class="form-control" id="id" name="id" placeholder="Enter id" required>
+        <p id="result"></p>
     </div>
     <div class="form-group">
         <label for="passwd">Password:</label>
