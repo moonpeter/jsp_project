@@ -11,7 +11,7 @@
     <title>templateTest.jsp</title>
     <link rel="stylesheet" href="/ch03_jdbc/ex03_db/style.css">
     <script>
-        var message='${message}';
+        var message='<%=request.getAttribute("message")%>';
         if(message!='null') {
             alert(message);
         }
@@ -35,7 +35,7 @@
         <%@ include file="left.jsp" %>
     </aside>
     <section>
-        <jsp:include page='${pagefile}.jsp'/>
+        <jsp:include page='<%=request.getAttribute("pagefile")+".jsp"%>'/>
     </section>
 </div>
 <footer>

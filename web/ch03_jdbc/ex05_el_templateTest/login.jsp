@@ -99,7 +99,7 @@
     </style>
     <script>
         $(function () {
-            var id = '${id}';
+            var id = '<%=request.getAttribute("id")%>';
             if(id) {
                 $("#id").val(id);
                 $("#remember").prop('checked', true);

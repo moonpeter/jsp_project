@@ -17,7 +17,7 @@
             <legend>유효성 검사</legend>
             <label>ID</label><br>
             <input type="text" size="10" name="id" id="id" placeholder="Enter Id">
-            <input type="button" value="ID중복검사" id="idcheck"><div id="message"></div><input type="hidden" id="result"><br>
+            <input type="button" value="ID중복검사" id="idcheck"><div id="result"></div><br>
 
             <label>비밀번호</label><br>
             <input type="password" name="pass" id="pass" placeholder="Enter Password"><br>

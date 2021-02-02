@@ -18,9 +18,8 @@
 <script>
     var message=["사용중인 아이디 입니다.", "사용가능한 아이디 입니다."];
     var color=["red", "green"];
-    var index=${result + 1};
-    $(opener.document).find("#message").text(message[index]).css('color', color[index]);
-    $(opener.document).find("#result").val('${result}');
+    var index=<%=result+1%>;
+    $(opener.document).find("#result").empty().text(message[index]).css('color', color[index]);
     window.close();
 </script>
 </body>

@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var idcheck_value = '';
 
@@ -11,7 +12,7 @@ $(document).ready(function () {
             pattern = /^[A-Z][a-zA-Z0-9_]{3,}$/;
             if (pattern.test($("#id").val())) {
                 idcheck_value = input_id;
-                var ref = "idcheck?id=" + $("#id").val();
+                var ref = "idcheck?id=" +$("#id").val();
                 window.open(ref, "idcheck", "width=350,height=200");
             } else {
                 alert("첫글자는 대문자이고 두번째부터는 대소문자, 숫자, _로 총 4개 이상이어야 합니다.");
@@ -73,13 +74,6 @@ $(document).ready(function () {
         var submit_id_value = $.trim($("#id").val())
         if (submit_id_value != idcheck_value) {
             alert("ID 중복검사를 하세요");
-            return false;
-        }
-
-        var result = $("#result").val();
-        if (result == -1) {
-            alert("사용 가능한 아이디로 다시 입력하세요");
-            $("#id").val('').focus();
             return false;
         }
 

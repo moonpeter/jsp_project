@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%
+    Template_join temp = (Template_join) request.getAttribute("temp");
+%>
 <html>
 <head>
     <title>Title</title>
@@ -15,11 +17,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/ch02_jsp/ex10_intro/intro.css" type="text/css">
     <script>
         $(function (){
-            var gender = '${temp.gender}';
+            var gender = '<%=temp.getGender()%>';
             $("input[value=" + gender + "]").prop("checked", true);
             $("input:radio").not(":checked").prop("disabled", true);
 
-            var hobbys = '${temp.hobby}'.split(',');
+            var hobbys = '<%=temp.getHobby()%>'.split(',');
             for(var i=0; i<hobbys.length; i++)
                 $("input[value=" + hobbys[i] + "]").prop("checked", true);
         })
@@ -33,19 +35,19 @@
                 <legend>정보수정</legend>
                 <hr>
                 <label for="id"><b>ID</b></label><br>
-                <input type="text" placeholder="Enter id" name="id" id="id" readonly value='${temp.id}' style="background:#ccc;width:100%">
+                <input type="text" placeholder="Enter id" name="id" id="id" readonly value='<%=temp.getId() %>' style="background:#ccc;width:100%">
                 <br>
                 <label for="pass"><b>Password</b></label><br>
                 <input type="password" placeholder="Enter Password" name="pass" id="pass"
-                       value='${temp.password}'>
+                       value='<%=temp.getPassword()%>'>
                 <label for="jumin1"><b>주민번호</b></label><br>
                 <input type="text" placeholder="주민번호 앞자리" size="6" maxlength="6" name="jumin1" id="jumin1"
-                       value="${temp.jumin.substring(0,6)}">
+                       value="<%=temp.getJumin().substring(0,6)%>">
                 <input type="text" placeholder="주민번호 뒷자리" size="7" maxlength="7" name="jumin2" id="jumin2"
-                       value="${temp.jumin.substring(7,14)}">
+                       value="<%=temp.getJumin().substring(7,14)%>">
                 <label for="email"><b>E-Mail</b></label><br>
-                <input type="text" name="email" id="email" value="${temp.email.split("@")[0]}">@<input
-                    type="text" name="domain" id="domain" value="${temp.email.split("@")[1]}">
+                <input type="text" name="email" id="email" value="<%=temp.getEmail().split("@")[0]%>">@<input
+                    type="text" name="domain" id="domain" value="<%=temp.getEmail().split("@")[1]%>">
                 <select name=sel id=sel>
                     <option value="">직접입력</option>
                     <option value="naver.com">naver.com</option>
@@ -73,16 +75,16 @@
                 <br>
 
                 <label>우편번호</label><br>
-                <input type="text" size="3" maxlength="5" name="post1" id="post1" value="${temp.post}">
+                <input type="text" size="3" maxlength="5" name="post1" id="post1" value="<%=temp.getPost()%>">
                 <input type="button" value="우편검색" id="postcode">
                 <br>
 
                 <label>주소</label><br>
-                <input type="text" size="50" name="address" id="address" value='${temp.address}'>
+                <input type="text" size="50" name="address" id="address" value='<%=temp.getAddress()%>'>
                 <br>
 
                 <label>자기소개</label><br>
-                <textarea name="intro" id="intro" cols="75" rows="10">${temp.intro}></textarea>
+                <textarea name="intro" id="intro" cols="75" rows="10"><%=temp.getIntro()%></textarea>
 
                 <br>
                 <div class="clearfix">

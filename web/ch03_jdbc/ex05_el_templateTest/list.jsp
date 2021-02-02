@@ -7,16 +7,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 <div class="container">
-    <c:if test="${!empty list}">
-        <table class="table">
+    <%
+        ArrayList<Template_join> list = (ArrayList<Template_join>) request.getAttribute("list");
+        if(list != null) {
+    %>
+    <table class="table">
         <thead>
         <tr>
             <th>아이디</th>
@@ -28,23 +29,27 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${list}" var="temp">
+        <%
+            for (Template_join temp : list) {
+        %>
         <tr>
-            <td>${temp.id}</td>
-            <td>${temp.genderView}</td>
-            <td>${temp.hobby}</td>
-            <td>${temp.address}></td>
-            <td>${temp.intro}</td>
-            <td>${temp.register_date}</td>
+            <td><%=temp.getId()%></td>
+            <td><%=temp.getGenderView()%></td>
+            <td><%=temp.getHobby()%></td>
+            <td><%=temp.getAddress()%></td>
+            <td><%=temp.getIntro()%></td>
+            <td><%=temp.getRegister_date()%></td>
         </tr>
-        </c:forEach>
+        <%
+            }
+        %>
         </tbody>
     </table>
-    </c:if>
-
-    <c:if test="${empty list}">
-        <h4>조회된 데이터가 없습니다.</h4>
-    </c:if>
+    <%
+        } else {
+            out.println("<h4>조회된 데이터가 없습니다.</h4>");
+        }
+    %>
 </div>
 </body>
 </html>

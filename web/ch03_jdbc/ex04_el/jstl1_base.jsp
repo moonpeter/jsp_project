@@ -42,5 +42,32 @@
 <c:if test="${6+3==8}">
     <h3>6+3은 9이다.</h3>
 </c:if>
+
+<c:choose>
+    <c:when test="${5+10==50}">
+        <h3>5+10은 50이다.</h3>
+    </c:when>
+
+    <c:otherwise>
+        <h3>5+10은 50이 아니다.</h3>
+    </c:otherwise>
+</c:choose>
+
+
+<c:set var="a" value="3"/>
+<c:choose>
+    <c:when test="${a==1}">
+        <h3>1입니다.</h3>
+    </c:when>
+    <c:when test="${a==2}">
+        <h3>2입니다.</h3>
+    </c:when>
+    <c:otherwise>
+        <h3>1 또는 2가 아닙니다.</h3>
+    </c:otherwise>
+</c:choose>
+<c:set var="a" value="${a+1}"/>
+<c:out value="${a}"/>
+
 </body>
 </html>
